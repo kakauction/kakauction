@@ -409,7 +409,7 @@
 		        , a.picture_7, a.picture_8, a.picture_9, a.picture_10, a.picture_11, a.picture_12, a.picture_13, a.picture_14, a.picture_15
 		        , a.picture_16, a.picture_17, a.picture_18, a.picture_19, a.picture_20,a.auction_regdate,a.auction_firstprice,a.auction_read_count
 		        , to_char(m.record_regdate,'yyyy-MM-dd') as recordD
-		        from RECORD m left join auction_car2 a
+		        from RECORD m left join Auction_Car4 a
                 on m.auction_no=a.auction_no
 				order by m.record_no desc, m.auction_no
 		    ) myAuction_List
@@ -455,7 +455,7 @@
 	</select>
 	
 	<select id="selectLastBuyer" parameterType="DateSearchVO" resultType="map">
-		select * from lastbuyer l, auction_car2 a where L.CAR_NUM=a.car_num and l.seller_member_id=A.MEMBER_ID
+		select * from lastbuyer l, admin_Auction_Car a where L.CAR_NUM=a.car_num and l.seller_member_id=A.seller_MEMBER_ID
 		<include refid="lastbuyerWhere"></include>
 	</select>
 	

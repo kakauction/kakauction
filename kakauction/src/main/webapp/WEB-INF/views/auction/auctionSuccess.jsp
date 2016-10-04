@@ -45,6 +45,19 @@
 				type="hidden" name="searchKeyword"
 				value="${searchVO.searchKeyword }">
 		</form>
+		<!-- 페이징 처리를 위한 form 시작-->
+		<div style="margin-top: 20px; margin-bottom: 20px;"><p>내가 참여한 경매 건 수 : ${alistsize }</p></div>
+		<form name="frmPage" method="post">
+			<input type="hidden" name="startDay" value="${param.startDay}">
+			<input type="hidden" name="endDay" value="${param.endDay}">
+			<input type="hidden" name="currentPage">	
+		</form>
+		
+		<form name="frm1" method="post" id="frmOrderList" action="<c:url value='/auction/myAuctionList.do'/>" >
+			<!-- 조회기간 include -->
+			<%@include file="../design/inc/dateTerm.jsp" %>
+			<input type="submit" value="조회" >
+		</form>
 
 		<div class="divList">
 			<p>전체 조회 결과 - ${alistsize }건 조회되었습니다</p>
