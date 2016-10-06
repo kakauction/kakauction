@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.kaka.common.Utility;
 import com.app.kaka.member.model.MemberService;
 import com.app.kaka.member.model.MemberVO;
 
@@ -55,6 +56,15 @@ public class LoginController {
 		}
 		
 		logger.info("아이디저장 chkSave={}",chkSave);
+		
+		String shaPwd = "";
+		try {
+			shaPwd = Utility.hashEncryption(memVo.getMemberPwd());
+			logger.info("shaPwd={}",shaPwd);
+			memVo.setMemberPwd(shaPwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		int result = memberService.loginCheck(memVo);
 		logger.info("로그인 처리 결과, result={}",result);

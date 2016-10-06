@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.app.kaka.common.Utility;
 import com.app.kaka.member.model.MemberService;
 import com.app.kaka.member.model.MemberVO;
 
@@ -79,6 +80,14 @@ public class MemberController {
 
 		int result = memberService.checkMemberJumin(jumin);
 		logger.info("주민번호 중복확인 결과, result={}",result);
+		
+		try {
+			String shaPwd = Utility.hashEncryption(memberVo.getMemberPwd());
+			memberVo.setMemberPwd(shaPwd);
+			logger.info("비밀번호 암호화 후 memberVo={}",memberVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		String msg="",url="";
 		if (result==MemberService.NONE_EXIST_JUMIN) {
